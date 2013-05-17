@@ -63,12 +63,13 @@ difference() {
 				// SD Card slot
 %				translate([-6.5,bb_height/2,-5.5])
 					cube([12,10,2], center=true);
-				translate([-6.5-4,bb_height/2,-5.5])
+				translate([-6.5-4,bb_height/2,-5.0])
 					cube([12,10,3], center=true);
-#				translate([-6.5+4.0,bb_height/2-9,-12.5])
+				// HDMI port
+#				translate([-6.5+3.0,bb_height/2-9,-12.0])
 					cube([12,20,9]);
 				// USB port
-				translate([10.5,bb_height/2,1.5])
+				translate([10.5,bb_height/2,2.0])
 					cube([16,10,8.5],center=true);
 			}
 		}

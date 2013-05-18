@@ -7,7 +7,7 @@ bb_curve_corner=10;
 
 bb_lid_thickness=2;
 bb_lid_depth=2.5;
-bb_lid_shrink=0.05;
+bb_lid_shrink=.5;
 
 corner_size=12;
 
@@ -18,23 +18,24 @@ bat_depth=8;
 bat_wall=5.0;
 bat_ceil=2.0;
 
-module RoundedBB(extra_width,extra_height,depth,curve=bb_curve_corner) {
+module RoundedBB(extra_width,extra_height,depth,curve=bb_curve_corner,bevel=0) {
 	minkowski() {
-		cube([bb_width-curve+extra_width,bb_height-curve+extra_height,depth],center=true);
-		cylinder(r=curve/2, h=0.0001, $fn=32, center=true);
+		cube([bb_width-curve+extra_width,bb_height-curve+extra_height,depth-bevel],center=true);
+		cylinder(r1=curve/2.5,r2=curve/2, h=.0001+bevel, $fn=32, center=true);
 	}
 }
 
 module BeagleLid(curve=bb_curve_corner) {
 	difference() {
 		union() {
-			RoundedBB(wall_thickness, wall_thickness, bb_lid_thickness, curve);
+			RoundedBB(wall_thickness, wall_thickness, bb_lid_thickness, curve, bb_lid_thickness*3/4);
 			translate([0,0,bb_lid_thickness/2+bb_lid_depth/2]) {
 				difference() {
-					RoundedBB(-bb_lid_shrink, -bb_lid_shrink, bb_lid_depth, curve-2);
+					rotate( [180,0,0] )
+					RoundedBB(-bb_lid_shrink, -bb_lid_shrink, bb_lid_depth, curve-2,bb_lid_depth*1/2);
 					*RoundedBB(-bb_lid_shrink-5, -bb_lid_shrink-5, bb_lid_depth, curve-2);
-					cube([bb_width-corner_size,bb_height,bb_lid_depth*5],center=true);
-					cube([bb_width,bb_height-corner_size,bb_lid_depth*5],center=true);
+					cube([bb_width-1.5*corner_size,bb_height,bb_lid_depth*5],center=true);
+					cube([bb_width,bb_height-1.5*corner_size,bb_lid_depth*5],center=true);
 				}
 			}
 /*

@@ -53,20 +53,27 @@ difference() {
 				// translate([-23,-bb_height/2-5,-16])     // protruding
 				// translate([-23,-bb_height/2,-9+0.334])  // thin layer underneath
 				//	cube([10,12,base_thickness-0.3333]);
-%				translate([-22,-bb_height/2-10,-12])
-					cube([10,20,8]);
 				translate([-23,-bb_height/2-10,-10])
 					cube([12,20,9]);
+				// original mini USB, doesn't fit cable
+%				translate([-22,-bb_height/2-10,-12])
+					cube([10,20,8]);
 
 				// -- Top End --
 
 				// SD Card slot
-%				translate([-6.5,bb_height/2,-5.5])
-					cube([12,10,2], center=true);
 				translate([-6.5-4,bb_height/2,-5.0])
 					cube([12,10,3], center=true);
+				// Original SD slot
+%				translate([-6.5,bb_height/2,-5.5])
+					cube([12,10,2], center=true);
+				// thumb depression for inserting card
+				translate([-6.5-4,bb_height/2+3.5,-5.0])
+					scale( [1,1,0.5] )
+					rotate( [90,0,0] )
+					cylinder( r1=6, r2=0, h=6 );
 				// HDMI port
-#				translate([-6.5+3.0,bb_height/2-9,-12.0])
+				translate([-6.5+3.0,bb_height/2-9,-12.0])
 					cube([12,20,9]);
 				// USB port
 				translate([10.5,bb_height/2,2.0])

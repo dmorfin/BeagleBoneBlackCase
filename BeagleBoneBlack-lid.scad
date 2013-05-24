@@ -1,8 +1,8 @@
 wall_thickness=6.5;
 base_thickness=2.0;
 bb_depth=20;
-bb_width=55.5;
-bb_height=88.5;
+bb_width=56.5;
+bb_height=89.5;
 bb_curve_corner=10;
 
 bb_lid_thickness=2;
